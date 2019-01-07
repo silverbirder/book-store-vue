@@ -1,1 +1,13 @@
-{}
+{
+    "version": 2,
+	"name": "book-store",
+	"builds": [
+		{ "src": "index.html", "use": "@now/html-minifier" },
+		{ "src": "styles.css", "use": "@now/html-minifier" },
+		{ "src": "index.js", "use": "@now/node-server" }
+  	],
+    "routes": [
+        {"src" : "/api/(.*)", "dest": "index.js"}
+    ],
+    "alias": "book-store.now.sh"
+}
