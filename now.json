@@ -1,13 +1,15 @@
 {
-    "version": 2,
-	"name": "book-store",
-	"builds": [
-		{ "src": "index.html", "use": "@now/html-minifier" },
-		{ "src": "styles.css", "use": "@now/html-minifier" },
-		{ "src": "index.js", "use": "@now/node-server" }
-  	],
-    "routes": [
-        {"src" : "/api/(.*)", "dest": "index.js"}
-    ],
-    "alias": "book-store.now.sh"
+	"name":  "book-store-vue",
+	"alias": "book-store-vue.sh",
+  "build": {
+    "env": {
+      "ALGOLIA_INDEX_KEY": "@index_key",
+      "ALGOLIA_APP_KEY": "@app_key",
+      "ALGOLIA_SEARCH_KEY": "@search_key"
+    }
+  },
+	"type": "docker",
+	"features": {
+		"cloud": "v1"
+	}
 }
