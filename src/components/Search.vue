@@ -9,7 +9,7 @@
         <ais-input placeholder="Find books..." class="md-input" autofocus></ais-input>
       </md-field>
     </div>
-    <ais-results class="md-layout md-gutter md-alignment-center" results-per-page=1>
+    <ais-results class="md-layout md-gutter md-alignment-center">
       <template slot-scope="{ result }">
         <md-card class="md-layout-item md-size-10 md-small-size-25 md-xsmall-size-50">
           <md-card-area md-inset>
@@ -20,12 +20,16 @@
             </md-card-media>
 
             <md-card-header>
-              <div class="md-title">{{ result.title }}</div>
-              <div class="md-subhead">{{ result.author }}</div>
+              <div class="md-title">
+                <ais-highlight :result="result" attribute-name="title"></ais-highlight>
+              </div>
+              <div class="md-subhead">
+                <ais-highlight :result="result" attribute-name="author"></ais-highlight>
+              </div>
             </md-card-header>
 
             <md-card-content>
-               {{ result.publisher }}, {{ result.pubdate }}
+              <ais-highlight :result="result" attribute-name="publisher"></ais-highlight>, <ais-highlight :result="result" attribute-name="pubdate"></ais-highlight>
             </md-card-content>
 
             <md-card-expand>
