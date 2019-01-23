@@ -9,7 +9,7 @@
         <ais-input placeholder="Find books..." class="md-input" autofocus></ais-input>
       </md-field>
     </div>
-    <ais-results class="md-layout md-gutter md-alignment-center">
+    <ais-results class="md-layout md-gutter md-alignment-center" results-per-page=1>
       <template slot-scope="{ result }">
         <md-card class="md-layout-item md-size-10 md-small-size-25 md-xsmall-size-50">
           <md-card-area md-inset>
@@ -33,13 +33,13 @@
                 <div>
                   <md-button @click="onShowDialog(result)">Edit</md-button>
                 </div>
-                <md-card-expand-trigger>
+                <md-card-expand-trigger v-if="result.textContent && result.textContent[0]">
                   <md-button class="md-icon-button">
                     <md-icon>keyboard_arrow_down</md-icon>
                   </md-button>
                 </md-card-expand-trigger>
               </md-card-actions>
-              <md-card-expand-content>
+              <md-card-expand-content v-if="result.textContent && result.textContent[0]">
                 <md-card-content>
                   {{ result.textContent[0].Text }}
                 </md-card-content>
