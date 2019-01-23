@@ -127,7 +127,7 @@
       </md-dialog-content>
       <md-dialog-actions>
         <md-button class="md-primary" @click="showDialog = false">Close</md-button>
-        <md-button class="md-primary" @click="onUpdate(dialog)">Save</md-button>
+        <md-button class="md-primary" @click="onUpdate">Save</md-button>
       </md-dialog-actions>
     </md-dialog>
   </ais-index>
@@ -143,6 +143,7 @@
         'INDEX_NAME': process.env.VUE_APP_ALGOLIA_INDEX_KEY,
         'NO_IMAGE_URL': process.env.VUE_APP_NO_IMAGE_URL,
         'AMAZON_DP_URL': process.env.VUE_APP_AMAZON_DP_URL,
+        'BOOK_API_URL': process.env.VUE_APP_BOOK_API_URL,
         'showDialog': false,
         'dialog': {
           'author': '',
@@ -187,9 +188,13 @@
         this.dialog.objectId = result.objectID;
         this.showDialog = true;
       },
-      onUpdate: function(dialog) {
+      onUpdate: function() {
+        let params = new URLSearchParams();
+        for (let key in this.dialog) {
+          params.append(key, this.dialog[key])
+        }
         this.axios
-          .post(`${this.BOOK_API_URL}/api/book/0.1/update`, dialog)
+          .post(`${this.BOOK_API_URL}/api/book/0.1/update`, params)
           .then(response => {alert(response.data.status); this.showDialog = false;})
           .catch(response => {console.log(response); this.showDialog = false;})
       }
